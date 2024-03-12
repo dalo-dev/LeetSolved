@@ -13,10 +13,21 @@ You can return the answer in any order. */
  */
 
 //! NOT OPTIMIZED
+// const twoSum = function (nums, target) {
+//   for (let i = 0; i < nums.length; i++) {
+//     for (let j = i + 1; j < nums.length; j++) {
+//       if (nums[i] + nums[j] === target) return [i, j];
+//     }
+//   }
+// };
+
+//* OPTIMIZED - USING HASHMAP
 const twoSum = function (nums, target) {
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = i + 1; j < nums.length; j++) {
-      if (nums[i] + nums[j] === target) return [i, j];
-    }
+  const hashMap = new Map();
+
+  for (const [i, num] of nums.entries()) {
+    let pair = target - num;
+    if (hashMap.has(pair)) return [hashMap.get(pair), i];
+    else hashMap.set(num, i);
   }
 };
