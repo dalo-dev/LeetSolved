@@ -8,31 +8,46 @@
  * @param {string[]} strs
  * @return {string}
  */
+// const longestCommonPrefix = function (strs) {
+//   let prefix = "";
+
+//   const shortestWordLength = strs.reduce(
+//     (acc, curr) => (acc.length < curr.length ? acc : curr),
+//     strs[0].length
+//   ).length;
+//   let [firstWord] = strs;
+
+//   for (let i = 0; i < shortestWordLength; i++) {
+//     let letter = firstWord[i];
+//     let equal = true;
+
+//     for (let word of strs) {
+//       if (word[i] !== letter) {
+//         equal = false;
+//         break;
+//       }
+//     }
+
+//     if (equal) prefix += letter;
+//     else break;
+//   }
+
+//   return prefix;
+// };
+
 const longestCommonPrefix = function (strs) {
   let prefix = "";
 
-  const shortestWordLength = strs.reduce(
-    (acc, curr) => (acc.length < curr.length ? acc : curr),
-    strs[0].length
-  ).length;
-  let [firstWord] = strs;
+  const wordsSorted = [...strs].sort();
+  let [firstWord] = wordsSorted;
+  let lastWord = wordsSorted.pop();
 
-  for (let i = 0; i < shortestWordLength; i++) {
-    let letter = firstWord[i];
-    let equal = true;
-
-    for (let word of strs) {
-      if (word[i] !== letter) {
-        equal = false;
-        break;
-      }
+  for (let i = 0; i < Math.min(firstWord.length, lastWord.length); i++) {
+    if (firstWord[i] !== lastWord[i]) {
+      return prefix;
     }
-
-    if (equal) prefix += letter;
-    else break;
+    prefix += firstWord[i];
   }
 
   return prefix;
 };
-
-console.log(longestCommonPrefix(["cir", "car"]));
